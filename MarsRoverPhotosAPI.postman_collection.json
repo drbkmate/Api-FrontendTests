@@ -1,0 +1,251 @@
+{
+	"info": {
+		"_postman_id": "f80b431e-d042-462b-b7d6-89ba739325c9",
+		"name": "MarsRoverPhotosAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Success\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{(token)}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "x-rapidapi-key",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1&api_key=egGSota1qePHj5FmwxNvMMR88vtoESKg8n1Sm7Yn",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"mars-photos",
+						"api",
+						"v1",
+						"rovers",
+						"curiosity",
+						"photos"
+					],
+					"query": [
+						{
+							"key": "sol",
+							"value": "1"
+						},
+						{
+							"key": "api_key",
+							"value": "egGSota1qePHj5FmwxNvMMR88vtoESKg8n1Sm7Yn"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get 200 key validation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Success\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Id check\", function () {\r",
+							"    pm.response.to.have.jsonBody(\"photos\")\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.photos[0].id).eql(4477);\r",
+							"\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{(token)}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "x-rapidapi-key",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1&api_key=egGSota1qePHj5FmwxNvMMR88vtoESKg8n1Sm7Yn",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"mars-photos",
+						"api",
+						"v1",
+						"rovers",
+						"curiosity",
+						"photos"
+					],
+					"query": [
+						{
+							"key": "sol",
+							"value": "1"
+						},
+						{
+							"key": "api_key",
+							"value": "egGSota1qePHj5FmwxNvMMR88vtoESKg8n1Sm7Yn"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get 400",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"IsRequestBad\", function () {\r",
+							"    pm.response.to.have.status(400)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/mars-photos/api/v1/rovers/doesntexist/photos?sol=1&api_key=egGSota1qePHj5FmwxNvMMR88vtoESKg8n1Sm7Yn",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"mars-photos",
+						"api",
+						"v1",
+						"rovers",
+						"doesntexist",
+						"photos"
+					],
+					"query": [
+						{
+							"key": "sol",
+							"value": "1"
+						},
+						{
+							"key": "api_key",
+							"value": "egGSota1qePHj5FmwxNvMMR88vtoESKg8n1Sm7Yn"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"IsPageNotFound\", function () {\r",
+							"    pm.response.to.have.status(404)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/mars-pp/api/v1/rovers/curiosity/photos?sol=1&api_key=egGSota1qePHj5FmwxNvMMR88vtoESKg8n1Sm7Yn",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"mars-pp",
+						"api",
+						"v1",
+						"rovers",
+						"curiosity",
+						"photos"
+					],
+					"query": [
+						{
+							"key": "sol",
+							"value": "1"
+						},
+						{
+							"key": "api_key",
+							"value": "egGSota1qePHj5FmwxNvMMR88vtoESKg8n1Sm7Yn"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

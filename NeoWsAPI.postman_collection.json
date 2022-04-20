@@ -1,0 +1,251 @@
+{
+	"info": {
+		"_postman_id": "e438a2d6-abc0-418e-9147-2f2cdde38320",
+		"name": "NeoWsAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Success\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{(token)}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "x-rapidapi-key",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=egGSota1qePHj5FmwxNvMMR88vtoESKg8n1Sm7Yn",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"neo",
+						"rest",
+						"v1",
+						"feed"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2015-09-07"
+						},
+						{
+							"key": "end_date",
+							"value": "2015-09-08"
+						},
+						{
+							"key": "api_key",
+							"value": "egGSota1qePHj5FmwxNvMMR88vtoESKg8n1Sm7Yn"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get 200 key validation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Success\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"ID check\", function () {\r",
+							"    pm.response.to.have.jsonBody(\"id\")\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).eql(\"3542519\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{(token)}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "x-rapidapi-key",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/neo/rest/v1/neo/3542519?api_key=egGSota1qePHj5FmwxNvMMR88vtoESKg8n1Sm7Yn",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"neo",
+						"rest",
+						"v1",
+						"neo",
+						"3542519"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "egGSota1qePHj5FmwxNvMMR88vtoESKg8n1Sm7Yn"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get 400",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"IsRequestBad\", function () {\r",
+							"    pm.response.to.have.status(400)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/neo/rest/v1/feed?start_date=2021-09-07&end_date=1&api_key=egGSota1qePHj5FmwxNvMMR88vtoESKg8n1Sm7Yn",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"neo",
+						"rest",
+						"v1",
+						"feed"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2021-09-07"
+						},
+						{
+							"key": "end_date",
+							"value": "1"
+						},
+						{
+							"key": "api_key",
+							"value": "egGSota1qePHj5FmwxNvMMR88vtoESKg8n1Sm7Yn"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"IsPageNotFound\", function () {\r",
+							"    pm.response.to.have.status(404)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/neo/rest/v1/doesntexist?start_date=2015-09-07&end_date=2015-09-08&api_key=egGSota1qePHj5FmwxNvMMR88vtoESKg8n1Sm7Yn",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"neo",
+						"rest",
+						"v1",
+						"doesntexist"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2015-09-07"
+						},
+						{
+							"key": "end_date",
+							"value": "2015-09-08"
+						},
+						{
+							"key": "api_key",
+							"value": "egGSota1qePHj5FmwxNvMMR88vtoESKg8n1Sm7Yn"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
